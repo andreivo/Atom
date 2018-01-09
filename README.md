@@ -37,8 +37,19 @@ Permissions of this strong copyleft license are conditioned on making available 
             type   = "Master Thesis (MSc in Engineering and Management of Space Systems)"
             url    = "http://urlib.net/rep/8JMKD3MGP7W/3FB2RJE?ibiurl.language=pt-BR"
   ```
-  
-## 3.	About the source code
+## 3. If you prefer download of binary file:
+The binary file can be downloaded in [Atom](https://github.com/andreivo/Atom/raw/master/binaries/AtomBinaries.rar).
+
+After downloading, unzip the file into a folder and run Atom.jar. If the Java environment variables are configured on your computer, just double-click, otherwise run from the command line:
+
+```bash
+java -jar Atom.jar
+```
+#### Requirements
+To run it is necessary to have the java SDK installed.
+
+
+## 4.	About the source code
 
 The tool is a desktop application and was developed using Java Swing.
 At that time, Netbeans IDE 7.0.1 and the Java 6 SDK were used.
