@@ -53,3 +53,6 @@ To run it is necessary to have the java SDK installed.
 
 The tool is a desktop application and was developed using Java Swing.
 At that time, Netbeans IDE 7.0.1 and the Java 6 SDK were used.
+
+## 5.	Contact
+andre.ivo@gmail.com
