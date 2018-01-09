@@ -9,7 +9,7 @@ Atom SysVAP allows representation in Mealy and Moore state machines, in addition
 
 ## 2.	License
 
-The tool is open source and is protected under the GNU General Public License v3.0 license.
+The tool is open source and is protected under the [GNU General Public License v3.0](LICENSE) license.
 Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
 #### In your publications do not forget to mention the work:
