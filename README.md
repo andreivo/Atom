@@ -1,6 +1,5 @@
 # Atom SysVAP
 
-[![ghit.me](https://ghit.me/badge.svg?repo=andreivo/Atom)](https://ghit.me/repo/andreivo/Atom)
 [![HitCount](http://hits.dwyl.io/andreivo/Atom.svg)](http://hits.dwyl.io/andreivo/Atom)
 
 ## 1.	Introduction
