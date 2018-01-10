@@ -43,23 +43,19 @@
             <version>3.0.1</version>
         </dependency>
     </dependencies>
-    
-    
-    
+
     <build>        
-        <finalName>${project.name}</finalName>
-        
+        <finalName>${project.name}</finalName>        
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>
-                
+                <version>3.0.0</version>                
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
-                        </goals>
+                        </goals> 
                     </execution>
                 </executions>
                 <configuration>
@@ -74,6 +70,49 @@
                     </archive>                       
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <id>l4j-clui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <jar>${project.build.directory}/${project.name}.jar</jar>
+                            <outfile>${project.build.directory}/${project.name}.exe</outfile>
+                            <downloadUrl>http://java.com/download</downloadUrl>
+                            <classPath>
+                                <mainClass>sysvap.SysApp</mainClass>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <icon>src/main/java/sysvap/gui/resources/icon.ico</icon>
+                            <jre>
+                                <minVersion>1.6.0</minVersion>
+                                <jdkPreference>preferJdk</jdkPreference>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>1.0.0.0</fileVersion>
+                                <txtFileVersion>${project.version}</txtFileVersion>
+                                <fileDescription>${project.name}</fileDescription>
+                                <copyright>2013 ${project.name}</copyright>
+                                <productVersion>1.0.0.0</productVersion>
+                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productName>${project.name}</productName>
+                                <companyName>${project.name}</companyName>
+                                <internalName>${project.name}</internalName>
+                                <originalFilename>${project.name}.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
         </plugins>       
         
         <resources>
