@@ -40,8 +40,11 @@ Permissions of this strong copyleft license are conditioned on making available 
             url    = "http://urlib.net/rep/8JMKD3MGP7W/3FB2RJE?ibiurl.language=pt-BR"
   ```
 ## 3. If you prefer download of binary file
-The binary file can be downloaded in [Atom](https://github.com/andreivo/Atom/raw/master/binaries/AtomBinaries.rar).
+The binary file can be downloaded in:
+ - [For Linux](https://github.com/andreivo/Atom/raw/master/binaries/AtomBinariesLinux.rar);
+ - [For Windows](https://github.com/andreivo/Atom/raw/master/binaries/AtomBinariesWindows.rar);
 
+#### If Linux
 After downloading, unzip the file into a folder and run Atom.jar. If the Java environment variables are configured on your computer, just double-click, otherwise run from the command line:
 
 ```bash
