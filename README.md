@@ -57,16 +57,15 @@ java -jar Atom.jar
 To run it is necessary to have the java SDK installed.
 
 
-#### A small known interface error
+## 4.	A small known interface error
 In the first run, after the system installation, it may occur that the Project Inspector and Object inspector area are not displayed.
 
-##### To solve it simply place your mouse on the left side and pull to the right.
+To solve it simply place your mouse on the left side and pull to the right.
 
-
-## 4.	About the source code
+## 5.	About the source code
 
 The tool is a desktop application and was developed using Java Swing.
 At that time, Netbeans IDE 7.0.1 and the Java 6 SDK were used.
 
-## 5.	Contact
+## 6.	Contact
 andre.ivo@gmail.com
