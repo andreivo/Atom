@@ -9,6 +9,9 @@ The tool is suitable for learning formal languages and allows integration with o
 
 Atom SysVAP allows representation in Mealy and Moore state machines, in addition to StatesCharts.
 
+### 1.1.	Screenshot
+![alt text](https://raw.githubusercontent.com/andreivo/Atom/master/Screenshot.png)
+
 ## 2.	License
 
 The tool is open source and is protected under the [GNU General Public License v3.0](LICENSE) license.
