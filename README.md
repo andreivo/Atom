@@ -9,6 +9,9 @@ The tool is suitable for learning formal languages and allows integration with o
 
 Atom SysVAP allows representation in Mealy and Moore state machines, in addition to StatesCharts.
 
+### 1.1.	Screenshot
+![alt text](https://raw.githubusercontent.com/andreivo/Atom/master/Screenshot.png)
+
 ## 2.	License
 
 The tool is open source and is protected under the [GNU General Public License v3.0](LICENSE) license.
@@ -54,10 +57,15 @@ java -jar Atom.jar
 To run it is necessary to have the java SDK installed.
 
 
-## 4.	About the source code
+## 4.	A small known interface error
+In the first run, after the system installation, it may occur that the Project Inspector and Object inspector area are not displayed.
+
+To solve it simply place your mouse on the left side and pull to the right.
+
+## 5.	About the source code
 
 The tool is a desktop application and was developed using Java Swing.
 At that time, Netbeans IDE 7.0.1 and the Java 6 SDK were used.
 
-## 5.	Contact
+## 6.	Contact
 andre.ivo@gmail.com
