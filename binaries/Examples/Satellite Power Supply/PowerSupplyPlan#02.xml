@@ -45,7 +45,7 @@
   </MEFS-FinalState>
   <SysEventPlan>
     <SysEvent>
-      <event>$var(bateria,100)</event>
+      <event>$var(battery,100)</event>
     </SysEvent>
     <SysEvent>
       <event>ECL</event>
