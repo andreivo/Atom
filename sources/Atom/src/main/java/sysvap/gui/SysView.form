@@ -1047,8 +1047,9 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
                       <SubComponents>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                        <Container class="org.fife.ui.rtextarea.RTextScrollPane" name="jScrollPane2">
                           <Properties>
+                            <Property name="lineNumbersEnabled" type="boolean" value="true"/>
                             <Property name="name" type="java.lang.String" value="jScrollPane2" noResource="true"/>
                           </Properties>
                           <AuxValues>
@@ -1064,7 +1065,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextArea" name="txtActionOnEnter">
+                            <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="txtActionOnEnter">
                               <Properties>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
@@ -1076,7 +1077,7 @@
                             </Component>
                           </SubComponents>
                         </Container>
-                        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                        <Container class="org.fife.ui.rtextarea.RTextScrollPane" name="jScrollPane4">
                           <Properties>
                             <Property name="name" type="java.lang.String" value="jScrollPane4" noResource="true"/>
                           </Properties>
@@ -1093,7 +1094,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextArea" name="txtActionOnExit">
+                            <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="txtActionOnExit">
                               <Properties>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>
@@ -1122,7 +1123,7 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
-                            <Component class="javax.swing.JTextArea" name="txtActionOnUnrecognized">
+                            <Component class="org.fife.ui.rsyntaxtextarea.RSyntaxTextArea" name="txtActionOnUnrecognized">
                               <Properties>
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="rows" type="int" value="5"/>

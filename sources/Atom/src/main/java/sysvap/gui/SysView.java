@@ -29,6 +29,7 @@ import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JTree;
 import javax.swing.Timer;
+import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.ResourceMap;
@@ -58,6 +59,18 @@ public final class SysView extends FrameView {
         super(app);
 
         initComponents();
+
+        txtActionOnEnter.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_LUA);
+        txtActionOnEnter.setCodeFoldingEnabled(true);        
+        jScrollPane2.setLineNumbersEnabled(true);
+        
+        txtActionOnExit.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_LUA);
+        txtActionOnExit.setCodeFoldingEnabled(true);
+        jScrollPane4.setLineNumbersEnabled(true);
+         
+        txtActionOnUnrecognized.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_LUA);
+        txtActionOnUnrecognized.setCodeFoldingEnabled(true);
+        jScrollPane5.setLineNumbersEnabled(true);
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -245,12 +258,12 @@ public final class SysView extends FrameView {
         btnUpdateWatch = new javax.swing.JButton();
         scrollVarWatch = new javax.swing.JScrollPane();
         tbsActionEvent = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtActionOnEnter = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtActionOnExit = new javax.swing.JTextArea();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        txtActionOnUnrecognized = new javax.swing.JTextArea();
+        jScrollPane2 = new org.fife.ui.rtextarea.RTextScrollPane();
+        txtActionOnEnter = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+        jScrollPane4 = new org.fife.ui.rtextarea.RTextScrollPane();
+        txtActionOnExit = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
+        jScrollPane5 = new org.fife.ui.rtextarea.RTextScrollPane();
+        txtActionOnUnrecognized = new org.fife.ui.rsyntaxtextarea.RSyntaxTextArea();
         mbPrincipal = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -1027,6 +1040,7 @@ public final class SysView extends FrameView {
 
         tbsActionEvent.setName("tbsActionEvent"); // NOI18N
 
+        jScrollPane2.setLineNumbersEnabled(true);
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
         txtActionOnEnter.setColumns(20);
@@ -1401,7 +1415,6 @@ public final class SysView extends FrameView {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         SysActionsGUI.showBibTex();
     }//GEN-LAST:event_jButton3ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEventScript;
     private javax.swing.JButton btnAddEventScript1;
@@ -1451,10 +1464,10 @@ public final class SysView extends FrameView {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private org.fife.ui.rtextarea.RTextScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private org.fife.ui.rtextarea.RTextScrollPane jScrollPane4;
+    private org.fife.ui.rtextarea.RTextScrollPane jScrollPane5;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -1482,9 +1495,9 @@ public final class SysView extends FrameView {
     private javax.swing.JTabbedPane tbsActionEvent;
     private javax.swing.JTabbedPane tbsOutput;
     private javax.swing.JTabbedPane tbsPrincipal;
-    private javax.swing.JTextArea txtActionOnEnter;
-    private javax.swing.JTextArea txtActionOnExit;
-    private javax.swing.JTextArea txtActionOnUnrecognized;
+    private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea txtActionOnEnter;
+    private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea txtActionOnExit;
+    private org.fife.ui.rsyntaxtextarea.RSyntaxTextArea txtActionOnUnrecognized;
     private javax.swing.JTextPane txtOutput;
     private javax.swing.JTextField txtScript;
     private javax.swing.JTextField txtScriptDelay;
