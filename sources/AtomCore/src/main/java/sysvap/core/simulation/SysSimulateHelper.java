@@ -5,8 +5,6 @@
 package sysvap.core.simulation;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import org.luaj.vm2.LuaBoolean;
@@ -39,6 +37,28 @@ public class SysSimulateHelper {
         }
         return null;
     }
+    
+    public static SysEventTransition getTransitionToEvent(SysState sysState, String event, SysLock lockConsole, ScriptEngine scriptEngine) {
+        SysEventTransition result = null;
+        int countTransition = 0;
+        
+        for (SysTransition transition : sysState.getSysTransitionOUT()) {
+            for (SysEventTransition eventTransition : transition.getEvents()) {
+                if (eventTransition.getEvent().equals(event)) {                   
+                    if (SysSimulateHelper.getEvalGuardCondition(lockConsole, scriptEngine, eventTransition.getGuardCondition())) {
+                        result = eventTransition;
+                        countTransition++;                        
+                        if(countTransition>1){
+                            System.err.println("Found nondeterminism to state " + sysState.getParentSysMEF().getName() + "." + sysState.getName() + " and event " + event + ".");
+                            return null;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    
 
     public static Integer countTransitionToEvent(SysState sysState, String event) {
         Integer result = 0;

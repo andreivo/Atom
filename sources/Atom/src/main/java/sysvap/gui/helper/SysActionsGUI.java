@@ -75,7 +75,7 @@ public class SysActionsGUI {
 
         }
 
-        form.getFrame().setTitle("Atom 1.0 - " + nameProject);
+        form.getFrame().setTitle("Atom 1.1 - " + nameProject);
     }
 
     public static String getNameProject() {

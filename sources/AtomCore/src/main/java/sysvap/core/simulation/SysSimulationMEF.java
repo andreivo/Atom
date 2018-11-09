@@ -170,7 +170,7 @@ public class SysSimulationMEF {
         //Atualiza as variaveis do ambiente LUA
         this.currentState = getInitialState();
         this.sysSimulation.setActualState(this.currentState);
-        SysSimulateHelper.putVarAction(sysLock, scriptEngine, "MEF", this.sysMEF);
+        SysSimulateHelper.putVarAction(sysLock, scriptEngine, getSysMEF().getName() + "_MEF", this.sysMEF);
         SysSimulateHelper.putVarAction(sysLock, scriptEngine, getSysMEF().getName() + "_initialState", this.initialState);
         SysSimulateHelper.putVarAction(sysLock, scriptEngine, getSysMEF().getName() + "_finalState", this.finalStateList);
         SysSimulateHelper.putVarAction(sysLock, scriptEngine, getSysMEF().getName() + "_state", this.currentState);
@@ -200,12 +200,9 @@ public class SysSimulationMEF {
 
         if (isOnline()) {
 
-            //Obtem a transição
-            SysEventTransition transitionToEvent = SysSimulateHelper.getTransitionToEvent(currentState, this.actualEvent.getEvent());
+            //Obtem a transição            
+            SysEventTransition transitionToEvent = SysSimulateHelper.getTransitionToEvent(currentState, this.actualEvent.getEvent(), sysLock, scriptEngine);
             if (transitionToEvent != null) {
-                Integer qdtoTransitionToEvent = SysSimulateHelper.countTransitionToEvent(currentState, this.actualEvent.getEvent());
-
-                if (qdtoTransitionToEvent == 1) {
                     //Verifica se atende a condição de guarda
                     if (SysSimulateHelper.getEvalGuardCondition(sysLock, scriptEngine, transitionToEvent.getGuardCondition())) {
 
@@ -257,10 +254,6 @@ public class SysSimulationMEF {
 
                         return false;
                     }
-                } else {
-                    System.err.println("Found nondeterminism to state " + currentState.getName() + " and event " + this.actualEvent.getEvent() + ".");
-                    return false;
-                }
             }
         }
         return false;
@@ -415,15 +408,19 @@ public class SysSimulationMEF {
             if (subMefs != null) {
                 //Guarda o historico dos estados caso a mef esteja configurada para manter o estado.
                 SysSimulationSubMEFStateOffline statesSubMEF = new SysSimulationSubMEFStateOffline();
-                if (sysMEF01.getKeepHistoryStates()) {
-                    if (subMefs.getSub_MEF01() != null) {
-                        statesSubMEF.setStateSubMEF01(subMefs.getSub_MEF01().getCurrentState().getName());
+                if (sysMEF01 != null) {
+                    if (sysMEF01.getKeepHistoryStates()) {
+                        if (subMefs.getSub_MEF01() != null) {
+                            statesSubMEF.setStateSubMEF01(subMefs.getSub_MEF01().getCurrentState().getName());
+                        }
                     }
                 }
 
-                if (sysMEF02.getKeepHistoryStates()) {
-                    if (subMefs.getSub_MEF02() != null) {
-                        statesSubMEF.setStateSubMEF02(subMefs.getSub_MEF02().getCurrentState().getName());
+                if (sysMEF02 != null) {
+                    if (sysMEF02.getKeepHistoryStates()) {
+                        if (subMefs.getSub_MEF02() != null) {
+                            statesSubMEF.setStateSubMEF02(subMefs.getSub_MEF02().getCurrentState().getName());
+                        }
                     }
                 }
                 sub_MEFsStateOffline.put(currentState.getId(), statesSubMEF);
@@ -486,7 +483,7 @@ public class SysSimulationMEF {
                             subMefs.getSub_MEF01().init();
                         }
                     } catch (Exception ex) {
-                        System.err.println("Error sub_MEF01: " + ex.getMessage());
+                        System.err.println("Error on state '" + currentState.getName() + "' on sub_MEF01 '" + sysMEF01.getName() + "': " + ex.getMessage());
                     }
                 }
 
@@ -522,7 +519,7 @@ public class SysSimulationMEF {
                         }
 
                     } catch (Exception ex) {
-                        System.err.println("Error sub_MEF02: " + ex.getMessage());
+                        System.err.println("Error on state '" + currentState.getName() + "' on sub_MEF02 '" + sysMEF02.getName() + "': " + ex.getMessage());
                     }
                 }
             }
