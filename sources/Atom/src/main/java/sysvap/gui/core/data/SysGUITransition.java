@@ -67,6 +67,7 @@ public class SysGUITransition extends SysTransition implements SysIPropEditor, O
             case NONE:
                 break;
             case TOOLMOUSE_MOUSEDRAGGED:
+                updateToolMouse_MouseDragged();
                 break;
             case TOOLMOUSE_MOUSEPRESSED:
                 updateToolMouse_MousePressed(obj);
@@ -77,6 +78,13 @@ public class SysGUITransition extends SysTransition implements SysIPropEditor, O
             case STATETIMEOUT:
                 updateStateTimeout(obj);
                 break;
+        }
+    }
+    
+     private void updateToolMouse_MouseDragged() {
+        if (getChecked()) {
+            SysGUIProject.getInstance().setChanged(true);
+            this.addPoint(getSysMEF().getLastSysGUIMessages().getX(), getSysMEF().getLastSysGUIMessages().getY());
         }
     }
 

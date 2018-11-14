@@ -372,12 +372,14 @@ public class SysActionsGUI {
             form.getjPropertyEditor().setObjExplore(SysGUIProject.getInstance());
         } else if (selected instanceof SysMEF) {
             SysMEF sysMEF = (SysMEF) selected;
-            tbsPrincipal.setSelectedIndex(sysMEF.getId());
+            int indexOfTab = tbsPrincipal.indexOfTab(sysMEF.getName());
+            tbsPrincipal.setSelectedIndex(indexOfTab);
             form.getjPropertyEditor().setObjExplore(sysMEF);
         } else if (selected instanceof SysState) {
             SysState sysState = (SysState) selected;
             sysState.setChecked(true);
-            tbsPrincipal.setSelectedIndex(sysState.getParentSysMEF().getId());
+            int indexOfTab = tbsPrincipal.indexOfTab(sysState.getParentSysMEF().getName());
+            tbsPrincipal.setSelectedIndex(indexOfTab);
             tbsPrincipal.repaint();
         }
     }

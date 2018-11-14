@@ -8,6 +8,7 @@
  */
 package sysvap.core.data;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class SysTransition implements SysIPropEditor, Serializable {
     private Integer milisec_timeout;
     private String actionOnEnter;
     private String actionOnExit;
+    private List<SysBreakPointTransition> points;
 
     public SysTransition(Integer id, SysState previusState, SysState nextState, SysMEF sysMEF) {
         this.id = id;
@@ -39,6 +41,7 @@ public class SysTransition implements SysIPropEditor, Serializable {
         this.sysMEF = sysMEF;
         this.checked = false;
         this.timeout = false;
+        this.points = new ArrayList<SysBreakPointTransition>();        
     }
 
     public SysState getNextState() {
@@ -75,6 +78,21 @@ public class SysTransition implements SysIPropEditor, Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<SysBreakPointTransition> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<SysBreakPointTransition> points) {
+        this.points = points;
+    }
+    
+    public void addPoint(int x, int y){
+        if( this.points==null){
+            this.points = new ArrayList<SysBreakPointTransition>();       
+        }
+        this.points.add(new SysBreakPointTransition(x, y));
     }
 
     public void setChecked(Boolean Checked) {
