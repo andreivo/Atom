@@ -149,7 +149,7 @@ public final class SysView extends FrameView {
         this.inDebug = false;
         configureButtonsDebuger();
 
-        System.out.println(SysConstants.OUT_ALERT + "Atom SysVAP 1.2 - 2018");
+        System.out.println(SysConstants.OUT_ALERT + "Atom SysVAP 1.3 - 2018");
         System.out.println("----------------------------------------------------");
         System.out.println("Author                 : André Ivo");
         System.out.println("Email                  : andre.ivo@gmail.com");

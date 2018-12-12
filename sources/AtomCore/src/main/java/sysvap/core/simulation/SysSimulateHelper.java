@@ -121,6 +121,8 @@ public class SysSimulateHelper {
                 System.err.println("execAction -> " + ex.getMessage());
             }
         } catch (InterruptedException ex) {
+            //execAction(lockConsole, scriptEngine, action);
+            System.out.println(ex.getMessage());
         } finally {
             lockConsole.unlock();
         }

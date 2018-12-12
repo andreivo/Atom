@@ -109,7 +109,7 @@ public class SysSimulation {
         return actualState;
     }
 
-    public void setActualState(SysState actualState) {
+    public synchronized void setActualState(SysState actualState) {
         this.actualState = actualState;
         if (sysSimListener != null) {
             sysSimListener.OnEvent(actualState);
@@ -179,11 +179,12 @@ public class SysSimulation {
         SysSimulateHelper.execAction(sysLock, scriptEngine, sysProject.getActionOnExit());
     }
 
-    public void sendEvent(String event) {
+    public synchronized void sendEvent(String event) {
         eventQueue.add(event);
     }
 
-    public void sendEvent(SysEvent event) {
+    public synchronized void sendEvent(SysEvent event)  {
+        
         //Processa a fila de eventos gerados internamente
         sendQueueEvents();
         //Executa o evento atual
@@ -193,22 +194,22 @@ public class SysSimulation {
         }
     }
 
-    public void sendQueueEvents() {
-        if (stopAll) {
-            if (sysSimListener != null) {
-                this.sysSimListener.stopAll();
-            }
-        } else {
-            while (!eventQueue.isEmpty()) {
-                Iterator<String> itEvent = eventQueue.iterator();
-                while (itEvent.hasNext()) {
-                    String itemEvent = itEvent.next();
-                    SysEvent ev = new SysEvent(itemEvent, null, null);
-                    eventQueue.remove(itemEvent);
-                    sendEvent(ev);
+    public synchronized void sendQueueEvents() {
+            if (stopAll) {
+                if (sysSimListener != null) {
+                    this.sysSimListener.stopAll();               
+                }
+            } else {
+                while (!eventQueue.isEmpty()) {
+                    Iterator<String> itEvent = eventQueue.iterator();
+                    while (itEvent.hasNext()) {
+                        String itemEvent = itEvent.next();
+                        SysEvent ev = new SysEvent(itemEvent, null, null);
+                        eventQueue.remove(itemEvent);
+                        sendEvent(ev);
+                    }
                 }
             }
-        }
     }
 
     private boolean eventControl(String event) {

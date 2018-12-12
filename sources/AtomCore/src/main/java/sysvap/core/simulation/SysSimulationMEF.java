@@ -193,7 +193,7 @@ public class SysSimulationMEF {
         return true;
     }
 
-    public synchronized boolean run() {
+    public boolean run() {
 
         //Processa a fila de eventos gerados internamente
         sysSimulation.sendQueueEvents();
@@ -260,41 +260,31 @@ public class SysSimulationMEF {
     }
 
     public synchronized boolean runTimeOut() {
-
+        
         //Processa a fila de eventos gerados internamente
         sysSimulation.sendQueueEvents();
-
+        
         if (isOnline()) {
-
-
             //Obtem a transição
             if (sysTransitionTimeOut != null) {
                 // Parar subThreads
                 stopSubMEFs(this.currentState);
-
                 //Executa as ações onExit do Estado;
                 SysSimulateHelper.execAction(sysLock, scriptEngine, this.currentState.getActionOnExit());
-
                 //Atualiza as variaveis dentro do LUA
                 this.currentState = sysTransitionTimeOut.getNextState();
                 this.sysSimulation.setActualState(this.currentState);
                 SysSimulateHelper.putVarAction(sysLock, scriptEngine, getSysMEF().getName() + "_state", this.currentState);
                 SysSimulateHelper.putVarAction(sysLock, scriptEngine, getSysMEF().getName() + "_transition", sysTransitionTimeOut);
-
                 //Executa as ações OnEnter - transition - event
                 SysSimulateHelper.execAction(sysLock, this.scriptEngine, sysTransitionTimeOut.getActionOnEnter());
-
                 //Executa as ações OnExit - event - transition
                 SysSimulateHelper.execAction(sysLock, this.scriptEngine, sysTransitionTimeOut.getActionOnExit());
-
                 //Executa as ações OnEnter - action
                 SysSimulateHelper.execAction(sysLock, this.scriptEngine, this.currentState.getActionOnEnter());
-
                 //Verifica se existem submefs para ser executadas.
                 startSubMEFs(this.currentState);
-
                 getTransitionTimeOut();
-
                 return true;
             }
         }
@@ -373,7 +363,8 @@ public class SysSimulationMEF {
                     if (subMefs != null) {
                         boolean result1 = false;
                         if (subMefs.getSub_MEF01() != null) {
-                            result1 = subMefs.getSub_MEF01().sendEvent(event);
+                            SysSimulationMEF sub_MEF01 = subMefs.getSub_MEF01();
+                            result1 = sub_MEF01.sendEvent(event);
                         }
                         boolean result2 = false;
                         if (subMefs.getSub_MEF02() != null) {
