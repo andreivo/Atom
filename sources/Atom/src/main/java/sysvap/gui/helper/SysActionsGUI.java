@@ -75,7 +75,7 @@ public class SysActionsGUI {
 
         }
 
-        form.getFrame().setTitle("Atom 1.3- " + nameProject);
+        form.getFrame().setTitle("Atom 1.4- " + nameProject);
     }
 
     public static String getNameProject() {
@@ -133,7 +133,6 @@ public class SysActionsGUI {
                 SysDialogs.showAlert("MEF '" + sysGUIMEF.getName() + "' can't be deleted!");
             }
         }
-
 
         if (tbsPrincipal.getTabCount() == 0) {
             addNewTab(form, tbsPrincipal, null);
@@ -613,7 +612,6 @@ public class SysActionsGUI {
                         event = (String) form.getJtbScriptDebugging().getModel().getValueAt(index, 0);
                     }
 
-
                     Object obj = form.getJtbScriptDebugging().getModel().getValueAt(index, 1);
                     if (obj != null) {
                         if (obj.getClass() == Integer.class) {
@@ -624,7 +622,6 @@ public class SysActionsGUI {
                             }
                         }
                     }
-
 
                     obj = form.getJtbScriptDebugging().getModel().getValueAt(index, 2);
                     if (obj != null) {
@@ -968,7 +965,6 @@ public class SysActionsGUI {
 
             Component tbComp = form.getTbsPrincipal().getComponent(form.getTbsPrincipal().getSelectedIndex());
 
-
             if (tbComp.getClass() == JScrollPane.class) {
                 JPanelView pnView = (JPanelView) ((JScrollPane) tbComp).getViewport().getView();
 
@@ -1003,7 +999,7 @@ public class SysActionsGUI {
 
             Font font = new Font("Arial", Font.BOLD, 12);  // cria a fonte para escrever a frase
             graphics.setFont(font);  // estabelece a fonte que será usada a partir daqui.
-            String texto = "Atom 1.3 - " + panel.getSysMEF().getName();
+            String texto = "Atom 1.4 - " + panel.getSysMEF().getName();
             graphics.drawString(texto, 5, 14);
             Rectangle2D bounds = graphics.getFontMetrics().getStringBounds(texto, graphics);
             bounds.setRect(bounds.getX() - 1, bounds.getY() + 11, bounds.getWidth() + 16, bounds.getHeight() + 5);
@@ -1109,7 +1105,6 @@ public class SysActionsGUI {
                     }
                 }
 
-
                 ////////////
                 String alfIN = null;
                 Collections.sort(listIN, Collator.getInstance());
@@ -1123,7 +1118,6 @@ public class SysActionsGUI {
 
                 alfIN = "I = {" + alfIN + "}\n";
                 System.out.println(alfIN);
-
 
                 /////////////////
                 String states = null;
@@ -1257,10 +1251,6 @@ public class SysActionsGUI {
                 for (String item : listOutputFuncOther) {
                     System.out.println(item);
                 }
-
-
-
-
 
             }
             System.out.println(SysConstants.OUT_ALERT + "-----------------------------------------------------------------------------");

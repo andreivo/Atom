@@ -1,11 +1,11 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.andreivo</groupId>
     <artifactId>Atom</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Atom</name>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>com.github.andreivo</groupId>
             <artifactId>AtomCore</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.jdesktop</groupId>
@@ -41,7 +41,7 @@
             <groupId>org.luaj</groupId>
             <artifactId>luaj-jse</artifactId>
             <version>3.0.1</version>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>com.fifesoft</groupId>
             <artifactId>rsyntaxtextarea</artifactId>
@@ -49,18 +49,18 @@
         </dependency>
     </dependencies>
 
-    <build>        
-        <finalName>${project.name}</finalName>        
+    <build>
+        <finalName>${project.name}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.0.0</version>                
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
-                        </goals> 
+                        </goals>
                     </execution>
                 </executions>
                 <configuration>
@@ -71,11 +71,11 @@
                     <archive>
                         <manifest>
                             <mainClass>sysvap.SysApp</mainClass>
-                        </manifest>                        
-                    </archive>                       
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
-            
+
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
@@ -102,12 +102,12 @@
                                 <jdkPreference>preferJdk</jdkPreference>
                             </jre>
                             <versionInfo>
-                                <fileVersion>1.0.0.0</fileVersion>
+                                <fileVersion>1.4.0.0</fileVersion>
                                 <txtFileVersion>${project.version}</txtFileVersion>
                                 <fileDescription>${project.name}</fileDescription>
                                 <copyright>2013 ${project.name}</copyright>
-                                <productVersion>1.0.0.0</productVersion>
-                                <txtProductVersion>1.0.0.0</txtProductVersion>
+                                <productVersion>1.4.0.0</productVersion>
+                                <txtProductVersion>1.4</txtProductVersion>
                                 <productName>${project.name}</productName>
                                 <companyName>${project.name}</companyName>
                                 <internalName>${project.name}</internalName>
@@ -117,25 +117,25 @@
                     </execution>
                 </executions>
             </plugin>
-            
-        </plugins>       
-        
+
+        </plugins>
+
         <resources>
-            <resource>    
+            <resource>
                 <directory>src/main/java/sysvap/resources</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>
                 <targetPath>sysvap/resources</targetPath>
             </resource>
-            <resource>    
+            <resource>
                 <directory>src/main/java/sysvap/gui/resources</directory>
                 <includes>
                     <include>**/*</include>
                 </includes>
                 <targetPath>sysvap/gui/resources</targetPath>
-            </resource>            
+            </resource>
         </resources>
     </build>
-    
+
 </project>

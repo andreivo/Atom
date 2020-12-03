@@ -183,8 +183,8 @@ public class SysSimulation {
         eventQueue.add(event);
     }
 
-    public synchronized void sendEvent(SysEvent event)  {
-        
+    public synchronized void sendEvent(SysEvent event) {
+
         //Processa a fila de eventos gerados internamente
         sendQueueEvents();
         //Executa o evento atual
@@ -195,21 +195,21 @@ public class SysSimulation {
     }
 
     public synchronized void sendQueueEvents() {
-            if (stopAll) {
-                if (sysSimListener != null) {
-                    this.sysSimListener.stopAll();               
-                }
-            } else {
-                while (!eventQueue.isEmpty()) {
-                    Iterator<String> itEvent = eventQueue.iterator();
-                    while (itEvent.hasNext()) {
-                        String itemEvent = itEvent.next();
-                        SysEvent ev = new SysEvent(itemEvent, null, null);
-                        eventQueue.remove(itemEvent);
-                        sendEvent(ev);
-                    }
+        if (stopAll) {
+            if (sysSimListener != null) {
+                this.sysSimListener.stopAll();
+            }
+        } else {
+            while (!eventQueue.isEmpty()) {
+                Iterator<String> itEvent = eventQueue.iterator();
+                while (itEvent.hasNext()) {
+                    String itemEvent = itEvent.next();
+                    SysEvent ev = new SysEvent(itemEvent, null, null);
+                    eventQueue.remove(itemEvent);
+                    sendEvent(ev);
                 }
             }
+        }
     }
 
     private boolean eventControl(String event) {

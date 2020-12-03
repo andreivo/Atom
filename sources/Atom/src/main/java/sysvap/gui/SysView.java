@@ -61,13 +61,13 @@ public final class SysView extends FrameView {
         initComponents();
 
         txtActionOnEnter.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_LUA);
-        txtActionOnEnter.setCodeFoldingEnabled(true);        
+        txtActionOnEnter.setCodeFoldingEnabled(true);
         jScrollPane2.setLineNumbersEnabled(true);
-        
+
         txtActionOnExit.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_LUA);
         txtActionOnExit.setCodeFoldingEnabled(true);
         jScrollPane4.setLineNumbersEnabled(true);
-         
+
         txtActionOnUnrecognized.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_LUA);
         txtActionOnUnrecognized.setCodeFoldingEnabled(true);
         jScrollPane5.setLineNumbersEnabled(true);
@@ -149,7 +149,7 @@ public final class SysView extends FrameView {
         this.inDebug = false;
         configureButtonsDebuger();
 
-        System.out.println(SysConstants.OUT_ALERT + "Atom SysVAP 1.3 - 2018");
+        System.out.println(SysConstants.OUT_ALERT + "Atom SysVAP 1.4 - 2020");
         System.out.println("----------------------------------------------------");
         System.out.println("Author                 : André Ivo");
         System.out.println("Email                  : andre.ivo@gmail.com");

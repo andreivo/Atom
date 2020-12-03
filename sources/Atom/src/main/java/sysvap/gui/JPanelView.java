@@ -1,13 +1,13 @@
 /*
  * *****************************************************************************
- *               MCTI - Ministério da Ciência, Tecnologia e Inovação             
- *                INPE - Instituto Nacional de Pesquisas Espaciais               
+ *               MCTI - Ministério da Ciência, Tecnologia e Inovação
+ *                INPE - Instituto Nacional de Pesquisas Espaciais
  * -----------------------------------------------------------------------------
- * André Aparecido de S. Ivo <andre.ivo@inpe.br>        
+ * André Aparecido de S. Ivo <andre.ivo@inpe.br>
  * *****************************************************************************
  */
 
-/*
+ /*
  * JPanelVisualizacao.java
  *
  * Created on Dec 7, 2012, 4:45:58 PM
@@ -38,7 +38,7 @@ import sysvap.gui.messages.SysTypeGUIMessages;
  * @author Usuario
  */
 public class JPanelView extends JPanel implements MouseListener, MouseMotionListener {
-    
+
     private SysGUIMEF sysMEF;
     private int screeanX;
     private int screeanY;
@@ -56,14 +56,14 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         this.setFocusable(true);
         this.tbsPrincipal = tbsPrincipal;
         this.form = form;
-        
+
         sysMEF = SysGUIProject.getInstance().addMEF(nameMEF);
         SysGUIProject.getInstance().setSelectedMEF(getSysMEF());
         if (SysGUIProject.getInstance().getBackgroundColor() != null) {
             this.setBackground(SysGUIProject.getInstance().getBackgroundColor());
         }
     }
-    
+
     public JPanelView(SysView form, JTabbedPane tbsPrincipal, SysGUIMEF sysMEF) {
         initComponents();
         setDoubleBuffered(true);
@@ -74,65 +74,65 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         this.form = form;
         this.sysMEF = sysMEF;
         setFocusTraversalKeysEnabled(false);
-        
+
         SysGUIProject.getInstance().setSelectedMEF(getSysMEF());
         if (SysGUIProject.getInstance().getBackgroundColor() != null) {
             this.setBackground(SysGUIProject.getInstance().getBackgroundColor());
         }
     }
-    
+
     public SysGUIMEF getSysMEF() {
         return sysMEF;
     }
-    
+
     public void setSysMEF(SysGUIMEF sysMEF) {
         this.sysMEF = sysMEF;
     }
-    
+
     public int getScreeanX() {
         return screeanX;
     }
-    
+
     public void setScreeanX(int screeanX) {
         this.screeanX = screeanX;
     }
-    
+
     public int getScreeanY() {
         return screeanY;
     }
-    
+
     public void setScreeanY(int screeanY) {
         this.screeanY = screeanY;
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Font ftEvent = new Font("Arial", Font.PLAIN, 12);
         g.setFont(ftEvent);
-        
+
         SysGUIProject.getInstance().setSelectedMEF(getSysMEF());
 
-        //Pinta os estados        
+        //Pinta os estados
         SysDrawer.paintStates(this, g, form);
         SysDrawer.paintTransitions(this, g);
 
-        //Altera os estados selecionados para exibir as propriedades.    
+        //Altera os estados selecionados para exibir as propriedades.
         //getForm().getjPropertyEditor().setObjExplore(getSysMEF().getSelectedObject());
     }
-    
+
     public JTabbedPane getTbsPrincipal() {
         return tbsPrincipal;
     }
-    
+
     public void setTbsPrincipal(JTabbedPane tbsPrincipal) {
         this.tbsPrincipal = tbsPrincipal;
     }
-    
+
     public SysView getForm() {
         return form;
     }
-    
+
     public void setForm(SysView form) {
         this.form = form;
     }
@@ -176,10 +176,10 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
             if (SysGUIProject.getInstance().getNameProject() != null) {
                 nameProject = SysGUIProject.getInstance().getNameProject();
             }
-            getForm().getFrame().setTitle("Atom 1.3 - " + nameProject + " (*)");
+            getForm().getFrame().setTitle("Atom 1.4 - " + nameProject + " (*)");
         }
     }
-    
+
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_DELETE:
@@ -223,7 +223,7 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         setTitle();
         getForm().getjPropertyEditor().setObjExplore(getSysMEF().getSelectedObject());
     }//GEN-LAST:event_formKeyReleased
-    
+
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
@@ -294,7 +294,7 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         repaint();
         setTitle();
     }
-    
+
     private void toolMouseDragged(MouseEvent e) {
         int _ballX = SysDrawerHelper.getCenterMouse(e.getX());
         int _ballY = SysDrawerHelper.getCenterMouse(e.getY());
@@ -305,7 +305,7 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         getSysMEF().sendSysGUIMessages(new SysGUIMessages(SysTypeGUIMessages.TOOLMOUSE_MOUSEDRAGGED, _ballX, _ballY));
         setTitle();
     }
-    
+
     private void toolAddTransitionDragged(MouseEvent e) {
         int _ballX = e.getX();
         int _ballY = e.getY();
@@ -313,12 +313,12 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         _ballX = Math.max(_ballX, 0);
         //--- Don't move the ball off top
         _ballY = Math.max(_ballY, 0);
-        
+
         setScreeanX(_ballX);
         setScreeanY(_ballY);
         setTitle();
     }
-    
+
     public void mousePressed(MouseEvent e) {
         switch (SysGUIProject.getInstance().getSelectedTool()) {
             case TOOL_MOUSE:
@@ -339,24 +339,24 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         setTitle();
         requestFocusInWindow();
     }
-    
+
     private void toolMousePressed(MouseEvent e) {
         getSysMEF().sendSysGUIMessages(new SysGUIMessages(SysTypeGUIMessages.TOOLMOUSE_MOUSEPRESSED, e.getX(), e.getY(),
                 this.getGraphics().getFontMetrics()));
         setTitle();
     }
-    
+
     private void toolAddStateMousePressed(MouseEvent e) {
         SysActionsGUI.addState(getForm(), this, e.getX(), e.getY());
     }
-    
+
     private void toolAddTransictionMousePressed(MouseEvent e) {
         if (getSysMEF().getStateInCoordenate(e.getX(), e.getY()) != null) {
             getSysMEF().updateTransitionOUT(e.getX(), e.getY());
         }
         setTitle();
     }
-    
+
     public void mouseReleased(MouseEvent e) {
         switch (SysGUIProject.getInstance().getSelectedTool()) {
             case TOOL_MOUSE:
@@ -375,38 +375,38 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
         setTitle();
         getForm().getjPropertyEditor().setObjExplore(getSysMEF().getSelectedObject());
     }
-    
+
     private void toolAddTransictionMouseRelease(MouseEvent e) {
         if (getSysMEF().getStateInCoordenate(e.getX(), e.getY()) != null) {
             getSysMEF().updateTransitionIN(e.getX(), e.getY());
-            
+
             SysGUIState stateTranIN = getSysMEF().getStateInCoordenate((int) getSysMEF().getPointStateTransitionIN().getX(), (int) getSysMEF().getPointStateTransitionIN().getY());
             SysGUIState stateTranOUT = getSysMEF().getStateInCoordenate((int) getSysMEF().getPointStateTransitionOUT().getX(), (int) getSysMEF().getPointStateTransitionOUT().getY());
-            
+
             stateTranOUT.addSysTransition(stateTranIN, "");
         }
         getSysMEF().setPointStateTransitionIN(null);
         getSysMEF().setPointStateTransitionOUT(null);
         setTitle();
     }
-    
+
     public void mouseExited(MouseEvent me) {
     }
-    
+
     public void mouseEntered(MouseEvent me) {
     }
-    
+
     public void mouseClicked(MouseEvent me) {
     }
-    
+
     public void mouseMoved(MouseEvent me) {
         setScreeanX(me.getX());
         setScreeanY(me.getY());
     }
-    
+
     public void focusGained(FocusEvent fe) {
     }
-    
+
     public void focusLost(FocusEvent fe) {
     }
 }
