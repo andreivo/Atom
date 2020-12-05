@@ -56,13 +56,22 @@ public class SysGUIConsoleOutput extends OutputStream {
                     if (typeMSG == SysConstants.MSG_PRINTOUT) {
                         if (str.startsWith(SysConstants.OUT_ALERT)) {
                             newStyle = style;
-                            msg = msg.substring(SysConstants.OUT_ALERT.length(),msg.length());
+                            msg = msg.substring(SysConstants.OUT_ALERT.length(), msg.length());
                         }
                     } else {
                         newStyle = style;
                     }
 
                     textComponent.getDocument().insertString(textComponent.getDocument().getLength(), msg, newStyle);
+                    String text = textComponent.getDocument().getText(0, textComponent.getDocument().getLength());
+                    String[] split = text.split(String.valueOf('\n'));
+
+                    int countlines = split.length;
+                    if (countlines >= 2000) {
+                        int idxOfLine = Integer.max(split[0].length(), 1);
+                        textComponent.getDocument().remove(0, idxOfLine);
+                    }
+
                 } catch (BadLocationException e) {
                     //Faça o log da exceção aqui
                 }
