@@ -41,6 +41,9 @@ public class AMQPLib {
             //Defines the key routes that forward messages to the queue
             channel.queueBind(queueName, exchangeName, routingKey);
 
+            channel.close();
+            connection.close();
+
             return "The queue has been created!";
         } catch (IOException e) {
         } catch (TimeoutException e) {
@@ -58,6 +61,10 @@ public class AMQPLib {
             channel.exchangeDeclare(exchangeName, deliveryType, true);
 
             channel.basicPublish(exchangeName, routingKey, null, message.getBytes("UTF-8"));
+
+            channel.close();
+            connection.close();
+
             return "Message is published in '" + routingKey + "' : '" + message + "'";
 
         } catch (IOException e) {
