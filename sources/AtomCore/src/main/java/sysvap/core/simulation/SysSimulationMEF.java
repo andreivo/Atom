@@ -248,6 +248,9 @@ public class SysSimulationMEF {
                         startSubMEFs(this.currentState);
 
                         getTransitionTimeOut();
+                        
+                        //Processa a fila de eventos gerados internamente
+                        sysSimulation.sendQueueEvents();
 
                         return true;
                     } else {
@@ -285,6 +288,8 @@ public class SysSimulationMEF {
                 //Verifica se existem submefs para ser executadas.
                 startSubMEFs(this.currentState);
                 getTransitionTimeOut();
+                //Processa a fila de eventos gerados internamente
+                sysSimulation.sendQueueEvents();
                 return true;
             }
         }

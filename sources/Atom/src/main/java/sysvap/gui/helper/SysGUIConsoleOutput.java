@@ -68,7 +68,7 @@ public class SysGUIConsoleOutput extends OutputStream {
 
                     int countlines = split.length;
                     if (countlines >= 2000) {
-                        int idxOfLine = Integer.max(split[0].length(), 1);
+                        int idxOfLine = Math.max(split[0].length(), 1);
                         textComponent.getDocument().remove(0, idxOfLine);
                     }
 

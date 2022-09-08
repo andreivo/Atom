@@ -180,7 +180,7 @@ public class SysSimulation {
     }
 
     public synchronized void sendEvent(String event) {
-        eventQueue.add(event);
+        eventQueue.add(event);        
     }
 
     public synchronized void sendEvent(SysEvent event) {
