@@ -1,12 +1,13 @@
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /*
@@ -22,9 +23,10 @@ public class ServerSocketLib {
     private ServerSocket serverSocket;
     private boolean socketConnect = false;
     private boolean clientConnect = false;
-    private List<ClientHandler> clients;
-    private List<Message> messages;
-    
+    private final List<ClientHandler> clients;
+    private final List<Message> messages;
+    private PrintWriter doutMessage;
+
     public ServerSocketLib() {
         clients = new ArrayList<ClientHandler>();
         messages = new ArrayList<Message>();
@@ -40,12 +42,8 @@ public class ServerSocketLib {
 
     public void closeAll() {
         if (clientConnect) {
-            try {                
-                for(ClientHandler cc : clients ){
-                 cc.getClientSocket().close();  
-                 cc.stop();
-                }                
-            } catch (IOException ex) {
+            for (ClientHandler cc : clients) {
+                cc.closeClient();
             }
         }
 
@@ -58,6 +56,38 @@ public class ServerSocketLib {
 
         socketConnect = false;
         clientConnect = false;
+    }
+
+    public void closeClient(String clientIP) {
+        if (clientConnect) {
+            for (ClientHandler cc : clients) {
+                Socket cS = cc.getClientSocket();
+                if (cS.getInetAddress().getHostAddress().equals(clientIP)) {
+                    cc.closeClient();
+                }
+            }
+        }
+        checkConnectionAlive();
+    }
+
+    public void cleanClientSocket() {
+        for (Iterator<ClientHandler> cc = clients.iterator(); cc.hasNext();) {
+            if (cc.next().getClientSocket().isClosed()) {
+                cc.remove();
+            }
+        }
+    }
+
+    public boolean checkConnectionAlive() {
+        cleanClientSocket();
+        clientConnect = clients.size() > 0;
+        return clientConnect;
+    }
+
+    public boolean hasActiveClient() {
+        cleanClientSocket();
+        clientConnect = clients.size() > 0;
+        return clientConnect;
     }
 
     public boolean startConnection(int port) {
@@ -83,13 +113,15 @@ public class ServerSocketLib {
                 ClientHandler clientHandler = new ClientHandler(socket);
                 clients.add(clientHandler);
                 clientHandler.start();
+                doutMessage = new PrintWriter(socket.getOutputStream(), true);
+
                 clientConnect = true;
                 return true;
             } catch (SocketException e) {
-                clientConnect = false;
+                checkConnectionAlive();
                 System.out.println("Accept Timed Out (" + timeout + " milisec)!");
             } catch (IOException ex) {
-                clientConnect = false;
+                checkConnectionAlive();
                 System.out.println("Accept Error: " + ex.getMessage());
             }
             return false;
@@ -97,8 +129,9 @@ public class ServerSocketLib {
             return true;
         }
     }
-    
-    private static class Message{
+
+    public static class Message {
+
         private String clientIP;
         private String message;
 
@@ -106,9 +139,9 @@ public class ServerSocketLib {
             this.clientIP = clientIP;
             this.message = message;
         }
-        
-        public static Message add(String clientIP, String message){
-            return new Message(clientIP, message);        
+
+        public static Message add(String clientIP, String message) {
+            return new Message(clientIP, message);
         }
 
         public String getClientIP() {
@@ -126,15 +159,22 @@ public class ServerSocketLib {
         public void setMessage(String message) {
             this.message = message;
         }
-        
+
+        @Override
+        public String toString() {
+            return clientIP + ": " + message;
+        }
+
     }
 
     private class ClientHandler extends Thread {
-        private Socket clientSocket;
-        private DataInputStream in;
+
+        private final Socket clientSocket;
+        private BufferedReader in;
+        private boolean stopThread = false;
 
         public ClientHandler(Socket socket) {
-            this.clientSocket = socket;            
+            this.clientSocket = socket;
         }
 
         public Socket getClientSocket() {
@@ -144,36 +184,60 @@ public class ServerSocketLib {
         public void run() {
             try {
                 System.out.println("Client connected: " + this.clientSocket.getInetAddress().getHostAddress());
-                
-                in = new DataInputStream(clientSocket.getInputStream());
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
                 String inputLine;
-                while ((inputLine = in.readUTF()) != null) {
-                    if ("quit".equals(inputLine)) {
-                        messages.add(Message.add(this.clientSocket.getInetAddress().getHostAddress(), "Client disconnected"));
+                while ((inputLine = in.readLine()) != null) {
+                    if (stopThread) {
                         break;
                     }
                     messages.add(Message.add(this.clientSocket.getInetAddress().getHostAddress(), inputLine));
                 }
-
                 in.close();
                 clientSocket.close();
             } catch (IOException ex) {
             }
         }
+
+        public void closeClient() {
+            try {
+                stopThread = true;
+                System.out.println("Client diconnected: " + this.clientSocket.getInetAddress().getHostAddress());
+                in.close();
+                clientSocket.close();
+            } catch (IOException ex) {
+                System.out.println("closeAll: " + ex.getMessage());
+            }
+        }
     }
 
-    public String receive() {
-        if(hasNextMessage()){
-            String msg =  messages.get(messages.size()-1).clientIP + ": " +messages.get(messages.size()-1).message;
-            messages.remove(messages.size()-1);
+    public Message receive() {
+        if (hasNextMessage()) {
+            Message msg = messages.get(messages.size() - 1);
+            messages.remove(messages.size() - 1);
             return msg;
-        }else{
+        } else {
+            return null;
+        }
+    }
+
+    public String receiveString() {
+        if (hasNextMessage()) {
+            String msg = messages.get(messages.size() - 1).toString();
+            messages.remove(messages.size() - 1);
+            return msg;
+        } else {
             return "";
         }
     }
 
     public boolean hasNextMessage() {
-        return messages.size()>0;
+        return messages.size() > 0;
+    }
+
+    public void sendMessage(String msg) {
+        if (clientConnect) {
+            doutMessage.println(msg);
+        }
     }
 }
