@@ -176,7 +176,7 @@ public class JPanelView extends JPanel implements MouseListener, MouseMotionList
             if (SysGUIProject.getInstance().getNameProject() != null) {
                 nameProject = SysGUIProject.getInstance().getNameProject();
             }
-            getForm().getFrame().setTitle("Atom 1.4 - " + nameProject + " (*)");
+            getForm().getFrame().setTitle("Atom 1.5 - " + nameProject + " (*)");
         }
     }
 

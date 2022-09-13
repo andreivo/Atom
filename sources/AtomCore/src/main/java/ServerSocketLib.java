@@ -25,7 +25,6 @@ public class ServerSocketLib {
     private boolean clientConnect = false;
     private final List<ClientHandler> clients;
     private final List<Message> messages;
-    private PrintWriter doutMessage;
 
     public ServerSocketLib() {
         clients = new ArrayList<ClientHandler>();
@@ -113,7 +112,6 @@ public class ServerSocketLib {
                 ClientHandler clientHandler = new ClientHandler(socket);
                 clients.add(clientHandler);
                 clientHandler.start();
-                doutMessage = new PrintWriter(socket.getOutputStream(), true);
 
                 clientConnect = true;
                 return true;
@@ -171,6 +169,7 @@ public class ServerSocketLib {
 
         private final Socket clientSocket;
         private BufferedReader in;
+        private PrintWriter doutMessage;
         private boolean stopThread = false;
 
         public ClientHandler(Socket socket) {
@@ -184,7 +183,9 @@ public class ServerSocketLib {
         public void run() {
             try {
                 System.out.println("Client connected: " + this.clientSocket.getInetAddress().getHostAddress());
+                //clientSocket.setSoTimeout(100);
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                doutMessage = new PrintWriter(clientSocket.getOutputStream(), true);
 
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
@@ -194,8 +195,17 @@ public class ServerSocketLib {
                     messages.add(Message.add(this.clientSocket.getInetAddress().getHostAddress(), inputLine));
                 }
                 in.close();
+                doutMessage.close();
                 clientSocket.close();
             } catch (IOException ex) {
+            }
+        }
+
+        public void sendMessage(String ip, String msg) {
+            if (ip.equals("*") || this.clientSocket.getInetAddress().getHostAddress().equals(ip)) {
+                if (!this.clientSocket.isClosed()) {
+                    doutMessage.println(msg);
+                }
             }
         }
 
@@ -203,7 +213,10 @@ public class ServerSocketLib {
             try {
                 stopThread = true;
                 System.out.println("Client diconnected: " + this.clientSocket.getInetAddress().getHostAddress());
+                clientSocket.shutdownInput();
                 in.close();
+                clientSocket.shutdownOutput();
+                doutMessage.close();
                 clientSocket.close();
             } catch (IOException ex) {
                 System.out.println("closeAll: " + ex.getMessage());
@@ -236,8 +249,14 @@ public class ServerSocketLib {
     }
 
     public void sendMessage(String msg) {
+        sendMessage("*", msg);
+    }
+
+    public void sendMessage(String clientIP, String msg) {
         if (clientConnect) {
-            doutMessage.println(msg);
+            for (ClientHandler cc : clients) {
+                cc.sendMessage(clientIP, msg);
+            }
         }
     }
 }

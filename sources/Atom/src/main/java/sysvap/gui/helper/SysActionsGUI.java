@@ -75,7 +75,7 @@ public class SysActionsGUI {
 
         }
 
-        form.getFrame().setTitle("Atom 1.4- " + nameProject);
+        form.getFrame().setTitle("Atom 1.5- " + nameProject);
     }
 
     public static String getNameProject() {
@@ -999,7 +999,7 @@ public class SysActionsGUI {
 
             Font font = new Font("Arial", Font.BOLD, 12);  // cria a fonte para escrever a frase
             graphics.setFont(font);  // estabelece a fonte que será usada a partir daqui.
-            String texto = "Atom 1.4 - " + panel.getSysMEF().getName();
+            String texto = "Atom 1.5 - " + panel.getSysMEF().getName();
             graphics.drawString(texto, 5, 14);
             Rectangle2D bounds = graphics.getFontMetrics().getStringBounds(texto, graphics);
             bounds.setRect(bounds.getX() - 1, bounds.getY() + 11, bounds.getWidth() + 16, bounds.getHeight() + 5);
