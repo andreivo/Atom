@@ -1,7 +1,5 @@
 # Atom SysVAP
 
-[![HitCount](http://hits.dwyl.io/andreivo/Atom.svg)](http://hits.dwyl.io/andreivo/Atom)
-
 ## 1.	Introduction
 Atom SysVAP is a tool for development and simulation of finite automata. The name "Atom" is an allusion to the atom, due to the appearance that an automaton can gain in a state diagram. The SysVAP surname is an acronym for "System for Validation of finite Automatons and Execution Plans".
 
