@@ -67,10 +67,11 @@ At that time, Netbeans IDE 7.0.1 and the Java 6 SDK were used.
 
 ## 6. Special Thanks
 
-### Example Nanosat Br2 with orbits
+#### Example Nanosat Br2 with orbits
 
 Example [Nanosat Br2 with orbits](https://github.com/andreivo/Atom/blob/master/binaries/Examples/Nanosat-br2/Br2_sim_orbit.vap) was adapted and built by:
-   Guilherme Venticinque, Gustavo Vicari, Matheus Miranda and Pedro Ângelo Carvalho
+
+Guilherme Venticinque, Gustavo Vicari, Matheus Miranda and Pedro Ângelo Carvalho
 
 ## 7.	Contact
 andre.ivo@gmail.com
